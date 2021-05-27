@@ -1,0 +1,7 @@
+<h2>{{stock.name | uppercase}} Details</h2>
+<div><span>id: </span>{{stock.id}}</div>
+<div>
+    <label for="name">Stock name: </label>
+    <input id="name" [(ngModel)]="stock.name" placeholder="name">
+</div>
+<div><span>ticker: </span>{{stock.ticker}}</div>
