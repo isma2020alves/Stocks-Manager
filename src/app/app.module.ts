@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { StocksComponent } from './stocks/stocks.component';
+import { StockDetailComponent } from './stock-detail/stock-detail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    StocksComponent
+    StocksComponent,
+    StockDetailComponent
   ],
   imports: [
     BrowserModule,
