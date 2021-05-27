@@ -1,6 +1,8 @@
 import { ApplicationRef, Component, OnInit } from '@angular/core';
+
 import { Stock } from '../stock';
-import { STOCKS } from '../mock-stocks';
+import { StockService } from '../stock.service'; 
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-stocks',
@@ -9,15 +11,25 @@ import { STOCKS } from '../mock-stocks';
 })
 export class StocksComponent implements OnInit {
 
-  stocks = STOCKS;
   selectedStock?: Stock;
+
+  stocks: Stock[] = [];
   
-  constructor() { }
+  constructor(private stockService: StockService, private messageService: 
+MessageService) { }
   
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getStocks()
   }
+
   onSelect(stock: Stock) : void {
     this.selectedStock = stock;
-}
+    this.messageService.add(`StocksComponent: Selected stock id=${stock.id}`)
+  }
+
+  getStocks(): void {
+    this.stockService.getStocks()
+      .subscribe(stocks => this.stocks =stocks);
+  }
 }
 
