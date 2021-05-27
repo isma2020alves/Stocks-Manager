@@ -1,5 +1,6 @@
 import { ApplicationRef, Component, OnInit } from '@angular/core';
 import { Stock } from '../stock';
+import { STOCKS } from '../mock-stocks';
 
 @Component({
   selector: 'app-stocks',
@@ -8,15 +9,15 @@ import { Stock } from '../stock';
 })
 export class StocksComponent implements OnInit {
 
-  stock : Stock = {
-    id: 1,
-    name: 'Apple',
-    ticker: 'AAPL'
-  };
-
+  stocks = STOCKS;
+  selectedStock?: Stock;
+  
   constructor() { }
-
+  
   ngOnInit(): void {
   }
-
+  onSelect(stock: Stock) : void {
+    this.selectedStock = stock;
 }
+}
+
