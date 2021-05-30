@@ -15,5 +15,12 @@ getStocks(): Observable<Stock[]> {
   return stocks;
 }
 
+getStock(id: number): Observable<Stock> { 
+  // For now, assume that a hero with the specified `id` always exists.
+  // Error handling will be added in the next after.
+  const stock = STOCKS.find(s => s.id === id)!;
+  this.messageService.add(`StockService: fetched stock id=${id}`);
+  return of(stock);
+}
   constructor(private messageService: MessageService) { }
 }

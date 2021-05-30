@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { StocksComponent } from './stocks/stocks.component';
 import { StockDetailComponent } from './stock-detail/stock-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import { AppRoutingModule } from './app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -16,12 +16,15 @@ import { MessagesComponent } from './messages/messages.component';
     AppComponent,
     StocksComponent,
     StockDetailComponent,
-    MessagesComponent
+    MessagesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    AppRoutingModule
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
