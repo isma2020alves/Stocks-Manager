@@ -33,4 +33,11 @@ export class StockDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  save(): void {
+    if (this.stock) {
+      this.stockService.updateStock(this.stock)
+        .subscribe(() => this.goBack());
+    }
+  }
 }

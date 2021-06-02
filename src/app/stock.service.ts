@@ -13,6 +13,10 @@ import  { catchError, map, tap } from 'rxjs/operators';
 export class StockService {
   
   private stocksUrl = 'api/stocks'; // URL to web api
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+  };
   
 /** GET heroes from the server */
 getStocks(): Observable<Stock[]> {
@@ -33,6 +37,15 @@ getStock(id: number): Observable<Stock> {
     catchError(this.handleError<Stock>('getStock id=${id}'))
   )
 }
+
+/** PUT: update the hero on the server */
+updateStock(stock: Stock): Observable<any> {
+  return this.http.put(this.stocksUrl, stock, this.httpOptions).pipe(
+    tap(_ => this.log(`updated stock id=${stock.id}`))
+  );
+}
+
+
 constructor (
   private http: HttpClient,
   private messageService: MessageService) { }
