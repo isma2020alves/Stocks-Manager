@@ -12,6 +12,15 @@ import { MessageService } from '../message.service';
 export class StocksComponent implements OnInit {
 
   stocks: Stock[] = [];
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.stockService.addStock({ name } as Stock)
+      .subscribe(stock => {
+        this.stocks.push(stock);
+      });
+  }
   
   constructor(private stockService: StockService) { }
   

@@ -45,7 +45,14 @@ updateStock(stock: Stock): Observable<any> {
   );
 }
 
-
+/** POST: add a new hero to the server */
+addStock(stock: Stock): Observable<Stock> {
+  return this.http.post<Stock>(this.stocksUrl, stock, this.httpOptions).pipe(
+    tap((newStock: Stock) => this.log(`added stock w/ id=${newStock.id}`),
+    catchError(this.handleError<Stock>('addStock')))
+  );
+  
+}
 constructor (
   private http: HttpClient,
   private messageService: MessageService) { }
