@@ -51,8 +51,17 @@ addStock(stock: Stock): Observable<Stock> {
     tap((newStock: Stock) => this.log(`added stock w/ id=${newStock.id}`),
     catchError(this.handleError<Stock>('addStock')))
   );
-  
-}
+  }
+
+/** DELETE: delete the hero from the server */
+  deleteStock(id: number): Observable<Stock> {
+    const url = `${this.stocksUrl}/${id}`;
+    
+    return this.http.delete<Stock>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted stock id=${id}`)),
+      catchError(this.handleError<Stock>('deleteStock'))
+    );
+  }
 constructor (
   private http: HttpClient,
   private messageService: MessageService) { }

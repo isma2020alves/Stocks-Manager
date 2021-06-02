@@ -21,6 +21,11 @@ export class StocksComponent implements OnInit {
         this.stocks.push(stock);
       });
   }
+
+  delete(stock:Stock): void {
+    this.stocks = this.stocks.filter(s => s !== stock);
+    this.stockService.deleteStock(stock.id).subscribe();
+  }
   
   constructor(private stockService: StockService) { }
   
