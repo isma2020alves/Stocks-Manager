@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
+import { StockSearchComponent } from './stock-search/stock-search.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { InMemoryDataService } from './in-memory-data.service';
     StocksComponent,
     StockDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    StockSearchComponent
   ],
   imports: [
     BrowserModule,

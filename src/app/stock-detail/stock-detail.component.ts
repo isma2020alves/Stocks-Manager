@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Stock } from '../stock';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
+import { Stock } from '../stock';
 import { StockService } from '../stock.service'; 
 
 @Component({
@@ -12,7 +12,7 @@ import { StockService } from '../stock.service';
 })
 export class StockDetailComponent implements OnInit {
 
-  @Input() stock?: Stock;
+  stock: Stock | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,7 +25,7 @@ export class StockDetailComponent implements OnInit {
   }
 
   getStock(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
     this.stockService.getStock(id)
       .subscribe(stock => this.stock = stock);
   }

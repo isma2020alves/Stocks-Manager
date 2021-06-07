@@ -18,12 +18,13 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
     return {stocks};
   }
- // Overrides the genId method to ensure that a hero always has an id.
-  // If the heroes array is empty,
+ // Overrides the genId method to ensure that a stock always has an id.
+  // If the stocks array is empty,
   // the method below returns the initial number (1).
-  // if the heroes array is not empty, the method below returns the highest
-  // hero id + 1.
+  // if the stocks array is not empty, the method below returns the highest
+  // stock id + 1.
   genId(stocks: Stock[]): number {
-    return stocks.length > 0 ? Math.max(...stocks.map(stock => stock.id)) + 1 : 1;
+    return stocks.length > 0 ? Math.max(...stocks.map(stock =>
+       stock.id)) + 1 : 1;
   }
 }
