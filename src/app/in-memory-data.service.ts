@@ -8,13 +8,13 @@ import { Stock } from './stock';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const stocks = [
-      { id: 1, name: 'Apple'},
-      { id: 2, name: 'Tesla'},
-      { id: 3, name: 'Microsoft'},
-      { id: 4, name: 'Jp Morgan'},
-      { id: 5, name: 'Google'},
-      { id: 6, name: 'Amazon'},
-      { id: 7, name: 'Alibaba'}
+      { id: 1, name: 'Apple', value: 300},
+      { id: 2, name: 'Tesla', value: '500'},
+      { id: 3, name: 'Microsoft', value: 700},
+      { id: 4, name: 'Jp Morgan', value: 100},
+      { id: 5, name: 'Google', value: 100},
+      { id: 6, name: 'Amazon', value: 100},
+      { id: 7, name: 'Alibaba', value: 100}
     ];
     return {stocks};
   }

@@ -13,10 +13,11 @@ export class StocksComponent implements OnInit {
 
   stocks: Stock[] = [];
 
-  add(name: string): void {
+  add(name: string, value: string): void {
     name = name.trim();
-    if (!name) { return; }
-    this.stockService.addStock({ name } as Stock)
+    value = value.trim();
+    if (!name || !value) { return; }
+    this.stockService.addStock({ name, value } as Stock)
       .subscribe(stock => {
         this.stocks.push(stock);
       });
@@ -35,7 +36,7 @@ export class StocksComponent implements OnInit {
 
   getStocks(): void {
     this.stockService.getStocks()
-      .subscribe(stocks => this.stocks =stocks);
+      .subscribe(stocks => this.stocks = stocks);
   }
 }
 

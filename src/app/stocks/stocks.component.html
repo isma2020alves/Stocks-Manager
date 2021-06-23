@@ -2,9 +2,12 @@
 <div>
   <label for="new-stock">Stock name: </label>
   <input id="new-stock" #stockName />
+  <label for="new-value">Stock value: </label>
+  <input type="number" id="new-value" #stockValue />
 
   <!-- (click) passes input value to add() and then clears the input -->
-  <button class="add-button" (click)="add(stockName.value); stockName.value=''">
+  <button class="add-button" (click)="add(stockName.value,stockValue.value);
+  stockName.value='';stockValue.value=''">
     Add stock
   </button>
 

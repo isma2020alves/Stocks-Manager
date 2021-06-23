@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Stocks Manager';
+  
+
+  constructor() {}
 }
+
