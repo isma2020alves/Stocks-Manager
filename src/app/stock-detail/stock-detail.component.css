@@ -2,6 +2,9 @@
 label {
     color: #435960;
     font-weight: bold;
+    margin-left: 5px
+    ;
+    
   }
   input {
     font-size: 1em;
@@ -9,6 +12,7 @@ label {
   }
   button {
     margin-top: 20px;
+    margin-left: 5px;
     background-color: #eee;
     padding: 1rem;
     border-radius: 4px;

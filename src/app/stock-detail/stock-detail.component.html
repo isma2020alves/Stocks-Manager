@@ -1,10 +1,12 @@
 <div *ngIf="stock">
 
     <h2>{{stock.name | uppercase}} Details</h2>
-    <div><span>id: </span>{{stock.id}}</div>
+    <div><span><h2>id: {{stock.id}}</h2></span></div>
     <div>
         <label for="stock-name">Stock name: </label>
         <input id="stock-name" [(ngModel)]="stock.name" placeholder="Stockname"> 
+        <label for="stock-value">Stock value: </label>
+        <input id="stock-value" [(ngModel)]="stock.value" placeholder="Stockvalue">
     </div>
 
     <button (click)="goBack()">go back</button>

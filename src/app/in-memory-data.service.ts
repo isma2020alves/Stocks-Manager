@@ -11,10 +11,6 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 1, name: 'Apple', value: 300},
       { id: 2, name: 'Tesla', value: '500'},
       { id: 3, name: 'Microsoft', value: 700},
-      { id: 4, name: 'Jp Morgan', value: 100},
-      { id: 5, name: 'Google', value: 100},
-      { id: 6, name: 'Amazon', value: 100},
-      { id: 7, name: 'Alibaba', value: 100}
     ];
     return {stocks};
   }

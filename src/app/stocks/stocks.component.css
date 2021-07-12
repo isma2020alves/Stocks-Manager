@@ -73,6 +73,18 @@ input {
   background-color: #42545C;
 }
 
+.back-button {
+  padding: .5rem 1.5rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  margin-left: 5px;
+ }
+ 
+ .back-button:hover {
+   color: white;
+   background-color: #42545C;
+ }
+
 button.delete {
   position: absolute;
   left: 210px;
@@ -84,6 +96,6 @@ button.delete {
 }
 
 button.delete:hover {
-  background-color: #525252;
+  background-color: #f01c1c;
   color: white;
 }

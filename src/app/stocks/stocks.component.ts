@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 import { Stock } from '../stock';
 import { StockService } from '../stock.service'; 
@@ -23,12 +24,18 @@ export class StocksComponent implements OnInit {
       });
   }
 
+  goBack(): void {
+    this.location.back();
+  }
+
+
   delete(stock:Stock): void {
     this.stocks = this.stocks.filter(s => s !== stock);
     this.stockService.deleteStock(stock.id).subscribe();
   }
   
-  constructor(private stockService: StockService) { }
+  constructor(private stockService: StockService, private location: Location,
+    ) { }
   
   ngOnInit() {
     this.getStocks()
