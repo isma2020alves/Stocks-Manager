@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Stock } from '../stock';
 import { StockService} from '../stock.service';
-import { single } from '../stock';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
@@ -11,23 +10,34 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 })
 export class DashboardComponent implements OnInit {
   stocks: Stock[] = [];
-  // single = [];
+  
   view: [number,number] = [700, 400];
 
   // options
   gradient: boolean = true;
   showLegend: boolean = true;
+  legendTitle: string = "Stocks";
   showLabels: boolean = true;
   isDoughnut: boolean = false;
   legendPosition: any = "right";
 
+  //functions 
+
+  labelFormatting (l:any)
+  {
+    return `${l}`;
+  }
+
+  formattingTooltipText (v:any)
+  {
+    return `<strong>$${v.value}`;
+  } 
+
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA','#448AFF', '#FFEB3B', '#E040FB', '#FF5722', '#009688']
   };
 
-  constructor(private stockService: StockService) {
-    // Object.assign(this, { single });
-  }
+  constructor(private stockService: StockService) {}
 
   ngOnInit() {
     this.getStocks();

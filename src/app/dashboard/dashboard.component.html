@@ -1,11 +1,7 @@
-<h2>My Stocks</h2>
 
-<div class="stocks-menu">
-    <!-- <a *ngFor="let stock of stocks"
-    routerLink="/detail/{{stock.id}}">
-        {{stock.name}}
-        
-    </a> -->
+<h2>My Stocks</h2>
+<div class="pie-chart">
+    
     <ngx-charts-pie-chart
     [view]="view"
     [scheme]="colorScheme"
@@ -13,8 +9,11 @@
     [gradient]="gradient"
     [legend]="showLegend"
     [labels]="showLabels"
+    [labelFormatting]="labelFormatting"
+    [tooltipText]="formattingTooltipText"
     [doughnut]="isDoughnut"
     [legendPosition]="legendPosition"
+    [legendTitle]="legendTitle"
     (select)="onSelect($event)"
     (activate)="onActivate($event)"
     (deactivate)="onDeactivate($event)"
