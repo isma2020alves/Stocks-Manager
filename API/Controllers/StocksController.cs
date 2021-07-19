@@ -20,14 +20,16 @@ namespace API.Controllers
 
         // GET: api/Stocks
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Stocks>>> GetStocks()
+        public async Task<ActionResult<IEnumerable<StocksDTO>>> GetStocks()
         {
-            return await _context.Stocks.ToListAsync();
+            return await _context.Stocks
+                .Select(x => StocksToDTO(x))
+                .ToListAsync();
         }
 
         // GET: api/Stocks/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Stocks>> GetStocks(long id)
+        public async Task<ActionResult<StocksDTO>> GetStocks(long id)
         {
             var stocks = await _context.Stocks.FindAsync(id);
 
@@ -36,35 +38,36 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            return stocks;
+            return StocksToDTO(stocks);
         }
 
         // PUT: api/Stocks/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStocks(long id, Stocks stocks)
+        public async Task<IActionResult> PutStocks(long id, StocksDTO stocksDTO)
         {
-            if (id != stocks.id)
+            if (id != stocksDTO.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(stocks).State = EntityState.Modified;
+            var stocks = await _context.Stocks.FindAsync(id);
+            if (stocks == null)
+            {
+                return NotFound();
+            }
+
+            stocks.Name = stocksDTO.Name;
+            stocks.Value = stocksDTO.Value;
+            stocks.Ticker = stocksDTO.Ticker;
 
             try
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException) when (!StocksExists(id))
             {
-                if (!StocksExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+               return NotFound();
             }
 
             return NoContent();
@@ -73,12 +76,20 @@ namespace API.Controllers
         // POST: api/Stocks
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Stocks>> PostStocks(Stocks stocks)
+        public async Task<ActionResult<StocksDTO>> CreateStock(StocksDTO stocksDTO)
         {
+            var stocks = new Stocks
+            {
+                Id = stocksDTO.Id,
+                Name = stocksDTO.Name,
+                Value = stocksDTO.Value,
+                Ticker = stocksDTO.Ticker
+            };
+
             _context.Stocks.Add(stocks);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetStocks), new { id = stocks.id }, stocks);
+            return CreatedAtAction(nameof(GetStocks), new { id = stocks.Id }, StocksToDTO(stocks));
         }
 
         // DELETE: api/Stocks/5
@@ -99,7 +110,16 @@ namespace API.Controllers
 
         private bool StocksExists(long id)
         {
-            return _context.Stocks.Any(e => e.id == id);
+            return _context.Stocks.Any(e => e.Id == id);
         }
+
+        private static StocksDTO StocksToDTO(Stocks stocks) =>
+            new StocksDTO
+            {
+                Id = stocks.Id,
+                Name = stocks.Name,
+                Value = stocks.Value,
+                Ticker = stocks.Ticker
+            };
     }
 }
