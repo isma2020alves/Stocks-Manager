@@ -10,18 +10,19 @@ namespace API
 {
     public class Startup
         {
-            public Startup(IConfiguration configuration)
-            {
-                Configuration = configuration;
-            }
+        private IConfiguration _config;
+        public Startup(IConfiguration config)
+        {
+            _config = config;
+        }
 
-            public IConfiguration Configuration { get; }
-
-            public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
             {
-                services.AddDbContext<StocksContext>(opt =>
-                                                   opt.UseInMemoryDatabase("StockList"));
-                services.AddControllers();
+            //services.AddDbContext<StocksContext>(opt =>
+            //                                   opt.UseInMemoryDatabase("StockList"));
+            services.AddDbContext<StocksContext>(opt =>
+                                                opt.UseSqlServer(_config.GetConnectionString("StocksDBConnection")));
+            services.AddControllers();
             }
 
             public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
