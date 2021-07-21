@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pGYhxZTlx592wTJVjiOYyFgFhcQm5crHZMVEa9qgi+XZKaWIcjD1IA9Sc6a6X6Z1uyXrdKEUJ4naXrlHgg1Oqg==",
+  "dgSpecHash": "Mz9zBtqui4aphOncn8UHRDKOZgfiLTuY0EclPT2FxIMK149ccZtjiD7qOymTaIFDGwFQZdVwBirg+ReDffAG9w==",
   "success": true,
-  "projectFilePath": "D:\\stocks-manager\\api\\API.csproj",
+  "projectFilePath": "D:\\Stocks-Manager\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\neube\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\neube\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

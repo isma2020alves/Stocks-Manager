@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\stocks-manager\\api\\API.csproj": {}
+    "D:\\Stocks-Manager\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\stocks-manager\\api\\API.csproj": {
+    "D:\\Stocks-Manager\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\stocks-manager\\api\\API.csproj",
+        "projectUniqueName": "D:\\Stocks-Manager\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\stocks-manager\\api\\API.csproj",
+        "projectPath": "D:\\Stocks-Manager\\API\\API.csproj",
         "packagesPath": "C:\\Users\\neube\\.nuget\\packages\\",
-        "outputPath": "D:\\stocks-manager\\api\\obj\\",
+        "outputPath": "D:\\Stocks-Manager\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
