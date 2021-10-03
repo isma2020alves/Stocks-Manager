@@ -9,7 +9,7 @@ using API.Models;
 namespace API
 {
     public class Startup
-        {
+    {
         private IConfiguration _config;
         public Startup(IConfiguration config)
         {
@@ -17,30 +17,37 @@ namespace API
         }
 
         public void ConfigureServices(IServiceCollection services)
-            {
-            //services.AddDbContext<StocksContext>(opt =>
-            //                                   opt.UseInMemoryDatabase("StockList"));
+        {
             services.AddDbContext<StocksContext>(opt =>
                                                 opt.UseSqlServer(_config.GetConnectionString("StocksDBConnection")));
             services.AddControllers();
-            }
 
-            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+            services.AddSwaggerGen();
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
             {
-                if (env.IsDevelopment())
-                {
-                    app.UseDeveloperExceptionPage();
-                }
-
-                app.UseHttpsRedirection();
-                app.UseRouting();
-
-                app.UseAuthorization();
-
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                });
+                app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Stocks API V1");
+            });
+
+            app.UseHttpsRedirection();
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
+}
