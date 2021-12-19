@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Stock } from './stock';
+import { IStock } from './stock';
 import { MessageService } from './message.service';
 import { STOCKS } from './mock-stocks';
 
@@ -25,75 +25,75 @@ export class StockService {
     private messageService: MessageService) { }
 
 /** GET stocks from the server */
-getStocks(): Observable<Stock[]> {
+getStocks(): Observable<IStock[]> {
   // const stocks  = of(STOCKS);
   // this.messageService.add('StockService: fetched stocks');
-  return this.http.get<Stock[]>(this.stocksUrl)
+  return this.http.get<IStock[]>(this.stocksUrl)
   .pipe(
     tap(_ => this.log('fetched  stocks')),
-    catchError(this.handleError<Stock[]>('getStocks', []))
+    catchError(this.handleError<IStock[]>('getStocks', []))
   );
 }
 
 /** GET stock by id. Return `undefined` when id not found */
-getStockNo404<Data>(id: number): Observable<Stock> {
+getStockNo404<Data>(id: number): Observable<IStock> {
   const url = `${this.stocksUrl}/?id=${id}`;
-  return this.http.get<Stock[]>(url)
+  return this.http.get<IStock[]>(url)
     .pipe(
       map(stocks => stocks[0]), // returns a {0|1} element array
       tap(s => {
         const outcome = s ? `fetched` : `did not find`;
         this.log(`${outcome} stock id=${id}`);
       }),
-      catchError(this.handleError<Stock>(`getStock id=${id}`))
+      catchError(this.handleError<IStock>(`getStock id=${id}`))
     );
 }
 
 /** GET stock by id. Will 404 if id not found */
-getStock(id: number): Observable<Stock> { 
+getStock(id: number): Observable<IStock> { 
   const url = `${this.stocksUrl}/${id}`;
-  return this.http.get<Stock>(url).pipe(
+  return this.http.get<IStock>(url).pipe(
     tap(_ => this.log('fetched stock id=${id}')),
-    catchError(this.handleError<Stock>('getStock id=${id}'))
+    catchError(this.handleError<IStock>('getStock id=${id}'))
     )
   }
   
   /* GET stocks whose name contains search term */
-    searchStocks(term: string): Observable<Stock[]> {
+    searchStocks(term: string): Observable<IStock[]> {
     if (!term.trim()) {
       // if not search term, return empty stock array.
       return of([]);
     }
-    return this.http.get<Stock[]>(`${this.stocksUrl}/?name=${term}`).pipe(
+    return this.http.get<IStock[]>(`${this.stocksUrl}/?name=${term}`).pipe(
         tap(x => x.length ?
           this.log(`found stocks matching "${term}"`) :
           this.log(`no stocks matching "${term}"`)),
-        catchError(this.handleError<Stock[]>('searchStocks', []))
+        catchError(this.handleError<IStock[]>('searchStocks', []))
     );
   }
 
   //////// Save methods //////////
 
   /** POST: add a new stock to the server */
-  addStock(stock: Stock): Observable<Stock> {
-    return this.http.post<Stock>(this.stocksUrl, stock, this.httpOptions).pipe(
-      tap((newStock: Stock) => this.log(`added stock w/ id=${newStock.id}`)),
-      catchError(this.handleError<Stock>('addStock'))
+  addStock(stock: IStock): Observable<IStock> {
+    return this.http.post<IStock>(this.stocksUrl, stock, this.httpOptions).pipe(
+      tap((newStock: IStock) => this.log(`added stock w/ id=${newStock.id}`)),
+      catchError(this.handleError<IStock>('addStock'))
     );
     }
             
     /** DELETE: delete the stock from the server */
-    deleteStock(id: number): Observable<Stock> {
+    deleteStock(id: number): Observable<IStock> {
       const url = `${this.stocksUrl}/${id}`;
       
-      return this.http.delete<Stock>(url, this.httpOptions).pipe(
+      return this.http.delete<IStock>(url, this.httpOptions).pipe(
         tap(_ => this.log(`deleted stock id=${id}`)),
-        catchError(this.handleError<Stock>('deleteStock'))
+        catchError(this.handleError<IStock>('deleteStock'))
         );
       }
       
       /** PUT: update the stock on the server */
-      updateStock(stock: Stock): Observable<any> {
+      updateStock(stock: IStock): Observable<any> {
         return this.http.put(this.stocksUrl, stock, this.httpOptions).pipe(
           tap(_ => this.log(`updated stock id=${stock.id}`))
         );

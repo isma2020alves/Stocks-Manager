@@ -6,7 +6,7 @@ import {
    debounceTime, distinctUntilChanged, switchMap
  } from 'rxjs/operators';
 
-import { Stock } from '../stock';
+import { IStock } from '../stock';
 import { StockService } from '../stock.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { StockService } from '../stock.service';
   styleUrls: [ './stock-search.component.css' ]
 })
 export class StockSearchComponent implements OnInit {
-  stocks$!: Observable<Stock[]>;
+  stocks$!: Observable<IStock[]>;
   private searchTerms = new Subject<string>();
 
   constructor(private stockService: StockService) {}

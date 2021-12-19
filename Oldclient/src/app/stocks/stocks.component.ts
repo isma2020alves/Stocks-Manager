@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
-import { Stock } from '../stock';
+import { IStock } from '../stock';
 import { StockService } from '../stock.service'; 
 import { MessageService } from '../message.service';
 
@@ -12,13 +12,13 @@ import { MessageService } from '../message.service';
 })
 export class StocksComponent implements OnInit {
 
-  stocks: Stock[] = [];
+  stocks: IStock[] = [];
 
-  add(name: string, value: string): void {
+  add(name: string, value: any): void {
     name = name.trim();
-    value = value.trim();
+    value = value;
     if (!name || !value) { return; }
-    this.stockService.addStock({ name, value } as Stock)
+    this.stockService.addStock({ name, value } as IStock)
       .subscribe(stock => {
         this.stocks.push(stock);
       });
@@ -29,7 +29,7 @@ export class StocksComponent implements OnInit {
   }
 
 
-  delete(stock:Stock): void {
+  delete(stock:IStock): void {
     this.stocks = this.stocks.filter(s => s !== stock);
     this.stockService.deleteStock(stock.id).subscribe();
   }

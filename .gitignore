@@ -389,3 +389,4 @@ FodyWeavers.xsd
 obj/*
 bin/*
 .suo*
+scaffold.txt

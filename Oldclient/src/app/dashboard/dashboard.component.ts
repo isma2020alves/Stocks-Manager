@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Stock } from '../stock';
+import { IStock } from '../stock';
 import { StockService} from '../stock.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -9,7 +9,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  stocks: Stock[] = [];
+  stocks: IStock[] = [];
   
   view: [number,number] = [700, 400];
 

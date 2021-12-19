@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Stock } from '../stock';
+import { IStock } from '../stock';
 import { StockService } from '../stock.service'; 
 
 @Component({
@@ -12,7 +12,7 @@ import { StockService } from '../stock.service';
 })
 export class StockDetailComponent implements OnInit {
 
-  stock: Stock | undefined;
+  stock: IStock | undefined;
 
   constructor(
     private route: ActivatedRoute,
