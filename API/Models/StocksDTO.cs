@@ -9,7 +9,7 @@ namespace API.Models
     {
         public long ID { get; set; }
         public string Name { get; set; }
-        public decimal Value { get; set; }
+        public decimal? Price { get; set; }
         public string Ticker { get; set; }
     }
 }

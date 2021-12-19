@@ -13,6 +13,6 @@ namespace API.Models
         {
         }
 
-        public DbSet<Stocks> Stocks { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
     }
 }

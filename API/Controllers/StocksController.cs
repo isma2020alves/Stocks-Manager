@@ -58,7 +58,7 @@ namespace API.Controllers
             }
 
             stocks.Name = stocksDTO.Name;
-            stocks.Value = stocksDTO.Value;
+            stocks.Price = stocksDTO.Price;
             stocks.Ticker = stocksDTO.Ticker;
 
             try
@@ -78,11 +78,11 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<StocksDTO>> CreateStock(StocksDTO stocksDTO)
         {
-            var stocks = new Stocks
+            var stocks = new Stock
             {
                 ID = stocksDTO.ID,
                 Name = stocksDTO.Name,
-                Value = stocksDTO.Value,
+                Price = stocksDTO.Price,
                 Ticker = stocksDTO.Ticker
             };
 
@@ -113,12 +113,12 @@ namespace API.Controllers
             return _context.Stocks.Any(e => e.ID == ID);
         }
 
-        private static StocksDTO StocksToDTO(Stocks stocks) =>
+        private static StocksDTO StocksToDTO(Stock stocks) =>
             new StocksDTO
             {
                 ID = stocks.ID,
                 Name = stocks.Name,
-                Value = stocks.Value,
+                Price = stocks.Price,
                 Ticker = stocks.Ticker
             };
     }
