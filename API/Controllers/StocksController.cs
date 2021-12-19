@@ -28,10 +28,10 @@ namespace API.Controllers
         }
 
         // GET: api/Stocks/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<StocksDTO>> GetStocks(long id)
+        [HttpGet("{ID}")]
+        public async Task<ActionResult<StocksDTO>> GetStocks(long ID)
         {
-            var stocks = await _context.Stocks.FindAsync(id);
+            var stocks = await _context.Stocks.FindAsync(ID);
 
             if (stocks == null)
             {
@@ -43,15 +43,15 @@ namespace API.Controllers
 
         // PUT: api/Stocks/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutStocks(long id, StocksDTO stocksDTO)
+        [HttpPut("{ID}")]
+        public async Task<IActionResult> PutStocks(long ID, StocksDTO stocksDTO)
         {
-            if (id != stocksDTO.Id)
+            if (ID != stocksDTO.ID)
             {
                 return BadRequest();
             }
 
-            var stocks = await _context.Stocks.FindAsync(id);
+            var stocks = await _context.Stocks.FindAsync(ID);
             if (stocks == null)
             {
                 return NotFound();
@@ -65,7 +65,7 @@ namespace API.Controllers
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException) when (!StocksExists(id))
+            catch (DbUpdateConcurrencyException) when (!StocksExists(ID))
             {
                return NotFound();
             }
@@ -80,7 +80,7 @@ namespace API.Controllers
         {
             var stocks = new Stocks
             {
-                Id = stocksDTO.Id,
+                ID = stocksDTO.ID,
                 Name = stocksDTO.Name,
                 Value = stocksDTO.Value,
                 Ticker = stocksDTO.Ticker
@@ -89,14 +89,14 @@ namespace API.Controllers
             _context.Stocks.Add(stocks);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetStocks), new { id = stocks.Id }, StocksToDTO(stocks));
+            return CreatedAtAction(nameof(GetStocks), new { ID = stocks.ID }, StocksToDTO(stocks));
         }
 
         // DELETE: api/Stocks/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteStocks(long id)
+        [HttpDelete("{ID}")]
+        public async Task<IActionResult> DeleteStocks(long ID)
         {
-            var stocks = await _context.Stocks.FindAsync(id);
+            var stocks = await _context.Stocks.FindAsync(ID);
             if (stocks == null)
             {
                 return NotFound();
@@ -108,15 +108,15 @@ namespace API.Controllers
             return NoContent();
         }
 
-        private bool StocksExists(long id)
+        private bool StocksExists(long ID)
         {
-            return _context.Stocks.Any(e => e.Id == id);
+            return _context.Stocks.Any(e => e.ID == ID);
         }
 
         private static StocksDTO StocksToDTO(Stocks stocks) =>
             new StocksDTO
             {
-                Id = stocks.Id,
+                ID = stocks.ID,
                 Name = stocks.Name,
                 Value = stocks.Value,
                 Ticker = stocks.Ticker
