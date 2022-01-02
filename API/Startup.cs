@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using API.Models;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace API
 {
@@ -20,9 +21,14 @@ namespace API
         {
             services.AddDbContext<StocksContext>(opt =>
                                                 opt.UseSqlServer(_config.GetConnectionString("StocksDBConnection")));
+
             services.AddControllers();
 
+            services.AddCors();
+
             services.AddSwaggerGen();
+
+            ConfigAuthentication(services);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -42,11 +48,26 @@ namespace API
             app.UseHttpsRedirection();
             app.UseRouting();
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+        }
+
+        private void ConfigAuthentication(IServiceCollection services)
+        {
+            services.AddCors(config =>
+            {
+                var policy = new CorsPolicy();
+                policy.Headers.Add("*");
+                policy.Methods.Add("*");
+                policy.Origins.Add("*");
+                policy.SupportsCredentials = true;
+                config.AddPolicy("policy", policy);
             });
         }
     }
