@@ -1,18 +1,18 @@
-body {
-    font-size: 18px;
-  }
-
-ul {
+.navbar {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(179, 15, 15);
+    background-color: rgb(10, 9, 9);
     position: sticky;
     top: 0;
   }
-  
-  li {
+
+  .active {
+    background-color: rgb(179, 15, 15);
+  }
+
+   li {
     float: left;
   }
   
@@ -25,6 +25,28 @@ ul {
   }
   
   /* Change the link color to #111 (black) on hover */
-  li a:hover {
-    background-color: #111;
+  li a:hover:not(.active) {
+    background-color: rgb(73, 71, 71);
   }
+
+  /* Style the content */
+.content {
+  padding: 10px;
+}
+
+/* Style the footer */
+.footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+.custom-tooltip {
+  color:  #070404;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #f1f1f1;
+  padding: auto;
+}
+
+.custom-tooltip p{
+  margin: auto;
+}
