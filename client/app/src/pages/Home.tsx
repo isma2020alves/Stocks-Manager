@@ -1,5 +1,5 @@
 import useGet from "../service/stockService";
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Tooltip, Label, LabelList } from 'recharts';
+import { PieChart, Pie, Tooltip, Legend } from 'recharts';
 import { IPie } from "../interfaces/IPie"
 import { colorsList } from "../assets/ColorsList"
 
@@ -32,14 +32,27 @@ function Home() {
         return null;
     };
 
+    const RADIAN = Math.PI / 180;
+    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
+        const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+        return (
+            <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+                {`${(percent * 100).toFixed(0)}%`}
+            </text>
+        );
+    };
+
     return (
         <div className="content">
             <h1>Stonks!</h1>
             <PieChart width={700} height={400}>
-                <Pie data={Object.values(pieData)} dataKey="value" outerRadius={170} />
+                <Pie data={Object.values(pieData)} dataKey="value" outerRadius={170} 
+                label={renderCustomizedLabel} labelLine={false} />
                 <Tooltip content={<CustomTooltip />} />
-                <Label value="Pages of my website" offset={0} position="insideBottom" />
-                <LabelList dataKey="value" position="top" />
+                <Legend />
             </PieChart>
         </div>
     );
