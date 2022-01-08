@@ -76,11 +76,10 @@ namespace API.Controllers
         // POST: api/Stocks
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<StocksDTO>> CreateStock(StocksDTO stocksDTO)
+        public async Task<ActionResult<StocksPostDTO>> CreateStock(StocksPostDTO stocksDTO)
         {
             var stocks = new Stock
             {
-                ID = stocksDTO.ID,
                 Name = stocksDTO.Name,
                 Price = stocksDTO.Price,
                 Ticker = stocksDTO.Ticker
@@ -89,7 +88,7 @@ namespace API.Controllers
             _context.Stocks.Add(stocks);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetStocks), new { ID = stocks.ID }, StocksToDTO(stocks));
+            return CreatedAtAction(nameof(GetStocks), StocksToDTO(stocks));
         }
 
         // DELETE: api/Stocks/5
